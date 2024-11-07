@@ -10,21 +10,23 @@ class MyForm(QDialog):
         super().__init__()
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
-        self.ui.convertButton.clicked.connect(self.convert)
-        self.rawText = ''
-        self.convertedText = ''
+        # self.ui.convertButton.clicked.connect(self.convert)
+        self.ui.rawText.textChanged.connect(self.convert)
+        # self.rawText = ''
+        # self.convertedText = ''
         self.show()
 
     def convert(self):
-        self.rawText = self.ui.rawText.text()
+        rawText = self.ui.rawText.text()
+        convertedText = rawText
         if self.ui.upperRadio.isChecked():
-            self.convertedText = self.rawText.upper()
+            convertedText = rawText.upper()
         elif self.ui.lowerRadio.isChecked():
-            self.convertedText = self.rawText.lower()
+            convertedText = rawText.lower()
         elif self.ui.invertRadio.isChecked():
-            self.convertedText = self.rawText.swapcase()
+            convertedText = rawText.swapcase()
 
-        self.ui.convertedText.setText(self.convertedText)
+        self.ui.convertedText.setText(convertedText)
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = MyForm()
